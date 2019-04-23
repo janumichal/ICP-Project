@@ -7,8 +7,8 @@
 #ifndef CPP_CHESS_HISTORYITEM_H
 #define CPP_CHESS_HISTORYITEM_H
 
-#import "../Chess_pieces/Piece.h"
-#import "Field.h"
+#include "../Chess_pieces/Piece.h"
+#include "Field.h"
 
 class HistoryItem{
 private:
@@ -17,27 +17,29 @@ private:
     Piece* target_to;
     Piece* exchange;
 public:
-    HistoryItem(Field* from, Field* to, Piece* target_to){
+    HistoryItem(){}
+
+    void addValues(Field *from, Field *to, Piece *target_to){
         this->from = from;
         this->to = to;
         this->target_to = target_to;
         this->exchange = nullptr;
     }
 
-    Field getFrom() {
+    Field* getFrom() {
         return this->from;
     }
 
-    Field getTo() {
+    Field* getTo() {
         return this->to;
     }
 
-    Piece getTarget_to() {
+    Piece* getTarget_to() {
         return this->target_to;
     }
 
-    void setExchange(Piece piece){
-        this.exchange = piece;
+    void setExchange(Piece* piece){
+        this->exchange = piece;
     }
 
     Piece* getExchange() {

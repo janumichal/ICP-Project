@@ -11,7 +11,7 @@ class Knight : public Piece{
 public:
     Knight(int x, int y, color_piece color) : Piece(x, y, 3, color){}
     bool isMoveValid(int x, int y){
-        if(x > this.x){
+        if(x > this->x){
             if(y > this->y){ // LEFT DOWN
                 return ((x == (this->x+1) && y == (this->y+2)) || (x == (this->x+2) && y == (this->y+1)));
             }else if (y < this->y){ //LEFT UP

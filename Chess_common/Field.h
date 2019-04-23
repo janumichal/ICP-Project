@@ -16,7 +16,7 @@ private:
 
     Piece *piece_on_board = nullptr;
     std::map<direction , Field*> fields_around;
-
+public:
     Field(int x, int y){
         setCol(x);
         setRow(y);
@@ -35,7 +35,7 @@ private:
     }
 
     void setRow(int row){
-        this.row = row;
+        this->row = row;
     }
 
     int getRow() {
@@ -52,8 +52,8 @@ private:
     }
 
     // set piece on this field
-    void setPiece(Piece piece){
-        this.piece_on_board = piece;
+    void setPiece(Piece* piece){
+        this->piece_on_board = piece;
     }
 
     // check if field is empty
@@ -62,17 +62,17 @@ private:
     }
 
     // put piece on field if empty and return true if piece was successfuly placed
-    void putPiece(Piece piece){
+    void putPiece(Piece* piece){
         removePiece();
-        if (piece != null){
-            piece.setCol(this.getCol());
-            piece.setRow(this.getRow());
+        if (piece != nullptr){
+            piece->setCol(this->getCol());
+            piece->setRow(this->getRow());
         }
         setPiece(piece);
     }
 
     Piece* removePiece() {
-        Piece *piece = this.piece_on_board;
+        Piece *piece = this->piece_on_board;
         this->piece_on_board = nullptr;
         return piece;
     }
