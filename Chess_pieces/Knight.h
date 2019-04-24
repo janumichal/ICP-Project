@@ -9,7 +9,7 @@
 
 class Knight : public Piece{
 public:
-    Knight(int x, int y, color_piece color) : Piece(x, y, 3, color){}
+    Knight(int x, int y, color_piece color) : Piece(x, y, 3, color, 'k'){}
     bool isMoveValid(int x, int y){
         if(x > this->x){
             if(y > this->y){ // LEFT DOWN

@@ -10,6 +10,8 @@
 #include "../Chess_pieces/Piece.h"
 #include "Field.h"
 
+using namespace std;
+
 class HistoryItem{
 private:
     Field* from;
@@ -17,34 +19,14 @@ private:
     Piece* target_to;
     Piece* exchange;
 public:
-    HistoryItem(){}
+    HistoryItem();
+    void addValues(Field *from, Field *to, Piece *target_to);
+    Field* getFrom();
+    Field* getTo();
+    Piece* getTarget_to();
+    void setExchange(Piece* piece);
+    Piece* getExchange();
 
-    void addValues(Field *from, Field *to, Piece *target_to){
-        this->from = from;
-        this->to = to;
-        this->target_to = target_to;
-        this->exchange = nullptr;
-    }
-
-    Field* getFrom() {
-        return this->from;
-    }
-
-    Field* getTo() {
-        return this->to;
-    }
-
-    Piece* getTarget_to() {
-        return this->target_to;
-    }
-
-    void setExchange(Piece* piece){
-        this->exchange = piece;
-    }
-
-    Piece* getExchange() {
-        return this->exchange;
-    }
 };
 
 #endif //CPP_CHESS_HISTORYITEM_H

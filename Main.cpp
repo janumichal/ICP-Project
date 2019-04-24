@@ -3,6 +3,8 @@
 //
 #include "Chess_common/Tab.h"
 
+using namespace std;
+
 int main(){
     Tab *tab1 = new Tab();
 }

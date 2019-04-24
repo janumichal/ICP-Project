@@ -9,7 +9,7 @@
 
 class King : public Piece{
 public:
-    King(int x, int y, color_piece color) : Piece(x, y, 0, color){}
+    King(int x, int y, color_piece color) : Piece(x, y, 0, color, 'K'){}
     bool isMoveValid(int x, int y){
         return (!(x == this->x && y == this->y)) && ((( this->x == x+1 ) || ( this->x == x-1 ) || (this->x == x && this->y != y)) && (( this->y == y-1 ) || ( this->y == y+1 ) || (this->y == y && this->x != x)) );
     }

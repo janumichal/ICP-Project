@@ -10,7 +10,7 @@
 
 class Bishop : public Piece {
 public:
-    Bishop(int x, int y, color_piece color) : Piece(x,y,3,color){}
+    Bishop(int x, int y, color_piece color) : Piece(x,y,3,color, 'b'){}
     bool isMoveValid(int x, int y){
         int array_size = 8;
         for (int i = 1; i <= array_size; i++){

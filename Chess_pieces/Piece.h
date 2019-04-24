@@ -12,13 +12,15 @@ protected:
     int x,y;
     color_piece color;
     int value_of_piece;
+    char name;
 
 public:
-    Piece(int x, int y, int value_of_piece, color_piece color){
+    Piece(int x, int y, int value_of_piece, color_piece color, char name){
         this->x = x;
         this->y = y;
         this->value_of_piece = value_of_piece;
         this->color = color;
+        this->name = name;
     }
 
     int getValue(){
@@ -36,6 +38,11 @@ public:
     void setRow(int y){
         this->y = y;
     }
+
+    char getName(){
+        return this->name;
+    }
+
 };
 
 #endif //CPP_CHESS_PIECE_H

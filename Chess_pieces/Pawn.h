@@ -11,7 +11,7 @@ class Pawn : public Piece{
 private:
     bool is_on_starting_position = true;
 public:
-    Pawn(int x, int y, color_piece color) : Piece(x, y, 1, color){}
+    Pawn(int x, int y, color_piece color) : Piece(x, y, 1, color, 'p'){}
     bool isMoveValid(int x, int y, Piece *target){
         if (this->color == BLACK){
             if (target == nullptr){

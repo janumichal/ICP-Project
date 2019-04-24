@@ -44,3 +44,11 @@ cmake-build-debug/CPP-Chess.exe
 cmake-build-debug/CMakeFiles/CPP-Chess.dir/Main.cpp.o
 cmake-build-debug/CMakeFiles/CPP-Chess.dir/depend.internal
 cmake-build-debug/CMakeFiles/CPP-Chess.dir/CXX.includecache
+cmake-build-debug/CMakeFiles/CPP-Chess.dir/Chess_common/Board.cpp.o
+cmake-build-debug/CMakeFiles/CPP-Chess.dir/Chess_common/Field.cpp.o
+cmake-build-debug/CMakeFiles/CPP-Chess.dir/Chess_common/Game.cpp.o
+cmake-build-debug/CMakeFiles/CPP-Chess.dir/Chess_common/History.cpp.o
+cmake-build-debug/CMakeFiles/CPP-Chess.dir/Chess_common/HistoryItem.cpp.o
+cmake-build-debug/CMakeFiles/CPP-Chess.dir/Chess_common/Move.cpp.o
+cmake-build-debug/CMakeFiles/CPP-Chess.dir/Chess_common/others.cpp.o
+cmake-build-debug/CMakeFiles/CPP-Chess.dir/Chess_common/Tab.cpp.o

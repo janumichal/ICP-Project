@@ -9,7 +9,7 @@
 
 class Queen : public Piece{
 public:
-    Queen(int x, int y, color_piece color) : Piece(x, y, 9, color){}
+    Queen(int x, int y, color_piece color) : Piece(x, y, 9, color, 'q'){}
     bool isMoveValid(int x, int y){
         int array_size = 8; //TODO CHANGE FOR BOARDSIZE
 

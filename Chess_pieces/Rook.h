@@ -9,7 +9,7 @@
 
 class Rook : public Piece{
 public:
-    Rook(int x, int y, color_piece color) : Piece(x, y, 5, color){}
+    Rook(int x, int y, color_piece color) : Piece(x, y, 5, color, 'r'){}
     bool isMoveValid(int x, int y){
         return ((x == this->x && y != this->y) || (x != this->x && y == this->y));
     }
