@@ -50,6 +50,11 @@ void Game::fullFormat(Move *one_move){
         if (one_move->isPawn() && isPawn(one_move->getFrom()->getPiece())) {
             if (one_move->getExchange() == '\0'){
                 move(one_move->getFrom(), one_move->getTo());
+
+                if (!checkMat(one_move)){
+                    return;
+                }
+
                 this->index++;
             }else{
                 if ((one_move->getFrom()->getPiece() != nullptr && one_move->getFrom()->getPiece()->getColor() == WHITE && one_move->getTo()->getRow() == 0)||(one_move->getFrom()->getPiece() != nullptr && one_move->getFrom()->getPiece()->getColor() == BLACK && one_move->getTo()->getRow() == 7)){
@@ -69,23 +74,48 @@ void Game::fullFormat(Move *one_move){
                         }
                     }
                 }else {
-                    printf("WRONGLY FORMATED MOVE WRONG PLACE\n");
+                    printf("WRONGLY FORMATED MOVE WRONG PLACE\n"); // TODO POPUP
                 }
             }
         }else if (one_move->isKnight() && isKnight(one_move->getFrom()->getPiece())) {
             move(one_move->getFrom(), one_move->getTo());
+
+            if (!checkMat(one_move)){
+                return;
+            }
+
             this->index++;
         }else if (one_move->isKing() && isKing(one_move->getFrom()->getPiece())){
             move(one_move->getFrom(), one_move->getTo());
+
+            if (!checkMat(one_move)){
+                return;
+            }
+
             this->index++;
         }else if (one_move->isQueen() && isQueen(one_move->getFrom()->getPiece())){
             move(one_move->getFrom(), one_move->getTo());
+
+            if (!checkMat(one_move)){
+                return;
+            }
+
             this->index++;
         }else if (one_move->isBishop() && isBishop(one_move->getFrom()->getPiece())){
             move(one_move->getFrom(), one_move->getTo());
+
+            if (!checkMat(one_move)){
+                return;
+            }
+
             this->index++;
         }else if (one_move->isRook() && isRook(one_move->getFrom()->getPiece())){
             move(one_move->getFrom(), one_move->getTo());
+
+            if (!checkMat(one_move)){
+                return;
+            }
+
             this->index++;
         }else {
             printf("WRONGLY FORMATED MOVE\n");
@@ -173,6 +203,236 @@ void Game::getFromCoords(Move* one_move){
     }else if (one_move->isRook()){
         rookCheck(one_move);
     }
+}
+
+Field *Game::findKing(color_piece color){
+    for (int x = 0; x < 8; x++){
+        for (int y = 0; y < 8; y++){
+            Field *f = this->board->getField(x,y);
+            if (f != nullptr && f->getPiece() != nullptr && isKing(f->getPiece()) && f->getPiece()->getColor() == color){
+                return f;
+            }
+        }
+    }
+    return nullptr;
+}
+
+bool Game::checkMat(Move *one_move){
+    if (one_move->isMat()){
+        Field *king_field = findKing(one_move->getColor() == WHITE ? BLACK : WHITE);
+        if(!isMat(king_field, king_field->getPiece()->getColor())){
+            printf("WRONG FORMAT IS NOT MAT!!!"); // TODO POPUP
+            undo();
+            return false;
+        }
+    } else if(one_move->isCheck()){
+        Field *king_field = findKing(one_move->getColor() == WHITE ? BLACK : WHITE);
+        if(!isCheck(king_field, king_field->getPiece()->getColor())){
+            printf("WRONG FORMAT IS NOT CHECK!!!"); // TODO POPUP
+            undo();
+            return false;
+        }
+    } else {
+        Field *king_field = findKing(one_move->getColor() == WHITE ? BLACK : WHITE);
+        if(isMat(king_field, king_field->getPiece()->getColor())){
+            printf("WRONG FORMAT IS MAT!!!"); // TODO POPUP
+            undo();
+            return false;
+        }
+        if(isCheck(king_field, king_field->getPiece()->getColor())){
+            printf("WRONG FORMAT IS CHECK!!!");// TODO POPUP
+            undo();
+            return false;
+        }
+    }
+
+    if(one_move->isMat()){
+        this->loaded_moves[this->index]->setMat();
+    }else if(one_move->isCheck()){
+        this->loaded_moves[this->index]->setCheck();
+    }
+
+    return true;
+}
+
+bool Game::controlEX(Field *f, color_piece color, char piece){
+    if(f->getPiece()->getColor() != color){
+        if(piece == 'b'){
+            if( isBishop(f->getPiece()) || isQueen(f->getPiece())) {
+                return true;
+            }
+        }else if (piece == 'r'){
+            if(isRook(f->getPiece()) || isQueen(f->getPiece())) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool Game::isCheck(Field *from, color_piece color_king){ // colors
+    // Pawn
+    if (color_king == BLACK){ // BLACK KING
+        Field *left_down = from->nextField(LEFT_DOWN);
+        Field *right_down = from->nextField(RIGHT_DOWN);
+        if (left_down != nullptr && left_down->getPiece() != nullptr && isPawn(left_down->getPiece()) && left_down->getPiece()->getColor() == WHITE){
+            return true;
+        }else if (right_down != nullptr && right_down->getPiece() != nullptr && isPawn(right_down->getPiece()) && right_down->getPiece()->getColor() == WHITE){
+            return true;
+        }
+    }else{ // WHITE KING
+        Field *left_up = from->nextField(LEFT_UP);
+        Field *right_up = from->nextField(RIGHT_UP);
+        if (left_up != nullptr && left_up->getPiece() != nullptr && isPawn(left_up->getPiece()) && left_up->getPiece()->getColor() == BLACK){
+            return true;
+        }else if (right_up != nullptr && right_up->getPiece() != nullptr && isPawn(right_up->getPiece()) && right_up->getPiece()->getColor() == BLACK){
+            return true;
+        }
+    }
+    // KNIGHT
+    int x,y;
+    x = from->getCol();
+    y = from->getRow();
+
+    Field *field[8];
+
+    field[0] = ((x-1) >= 0 && (y-2) >= 0) ? this->board->getField(x-1,y-2) : nullptr;
+    field[1] = ((x-1) >= 0 && (y+2) <= 7) ? this->board->getField(x-1,y+2) : nullptr;
+
+    field[2] = ((x-2) >= 0 && (y-1) >= 0) ? this->board->getField(x-2,y-1) : nullptr;
+    field[3] = ((x-2) >= 0 && (y+1) <= 7) ? this->board->getField(x-2,y+1) : nullptr;
+
+    field[4] = ((x+1) <= 7 && (y-2) >= 0) ? this->board->getField(x+1,y-2) : nullptr;
+    field[5] = ((x+1) <= 7 && (y+2) <= 7) ? this->board->getField(x+1,y+2) : nullptr;
+
+    field[6] = ((x+2) <= 7 && (y-1) >= 0) ? this->board->getField(x+2,y-1) : nullptr;
+    field[7] = ((x+2) <= 7 && (y+1) <= 7) ? this->board->getField(x+2,y+1) : nullptr;
+
+    for (int i = 0; i < 8 ; i++){
+        Field *fld = field[i];
+        if (fld != nullptr && fld->getPiece() != nullptr && isKnight(fld->getPiece()) && fld->getPiece()->getColor() != color_king){
+            return true;
+        }
+    }
+
+    // BISHOP
+    Field *f1 = from->nextField(LEFT_UP);
+    Field *f2 = from->nextField(LEFT_DOWN);
+    Field *f3 = from->nextField(RIGHT_UP);
+    Field *f4 = from->nextField(RIGHT_DOWN);
+
+    while (f1 != nullptr || f2 != nullptr || f3 != nullptr || f4 != nullptr){
+        if (f1 != nullptr) {
+            if (f1->getPiece() != nullptr){
+                if(controlEX(f1, color_king, 'b')){
+                    return true;
+                }
+                f1 = nullptr;
+            }else{
+                f1 = f1->nextField(LEFT_UP);
+            }
+        }
+        if (f2 != nullptr) {
+            if (f2->getPiece() != nullptr){
+                if(controlEX(f2, color_king, 'b')){
+                    return true;
+                }
+                f2 = nullptr;
+            }else{
+                f2 = f2->nextField(LEFT_DOWN);
+            }
+        }
+        if (f3 != nullptr) {
+            if (f3->getPiece() != nullptr){
+                if(controlEX(f3, color_king, 'b')){
+                    return true;
+                }
+                f3 = nullptr;
+            }else{
+                f3 = f3->nextField(RIGHT_UP);
+            }
+        }
+        if (f4 != nullptr) {
+            if (f4->getPiece() != nullptr){
+                if(controlEX(f4, color_king, 'b')){
+                    return true;
+                }
+                f4 = nullptr;
+            }else{
+                f4 = f4->nextField(RIGHT_DOWN);
+            }
+        }
+    }
+    // ROOK
+    f1 = from->nextField(LEFT);
+    f2 = from->nextField(UP);
+    f3 = from->nextField(RIGHT);
+    f4 = from->nextField(DOWN);
+
+    while (f1 != nullptr || f2 != nullptr || f3 != nullptr || f4 != nullptr){
+        if (f1 != nullptr) {
+            if(f1->getPiece() != nullptr){
+                if(controlEX(f1, color_king, 'r')){
+                    return true;
+                }
+                f1 = nullptr;
+            }else{
+                f1 = f1->nextField(LEFT);
+            }
+        }
+        if (f2 != nullptr) {
+            if(f2->getPiece() != nullptr){
+                if(controlEX(f2, color_king, 'r')){
+                    return true;
+                }
+                f2 = nullptr;
+            }else{
+                f2 = f2->nextField(UP);
+            }
+        }
+        if (f3 != nullptr) {
+            if(f3->getPiece() != nullptr){
+                if(controlEX(f3, color_king, 'r')){
+                    return true;
+                }
+                f3 = nullptr;
+            }else{
+                f3 = f3->nextField(RIGHT);
+            }
+        }
+        if (f4 != nullptr) {
+            if(f4->getPiece() != nullptr){
+                if(controlEX(f4, color_king, 'r')){
+                    return true;
+                }
+                f4 = nullptr;
+            }else{
+                f4 = f4->nextField(DOWN);
+            }
+        }
+    }
+
+    return false;
+}
+
+bool Game::isMat(Field *from, color_piece color_king){
+    bool mat = true;
+    if(!isCheck(from, color_king)){
+        return false;
+    }
+    for (int pointer = 0 ; pointer < 8; pointer++) { // FOR EACH ENUM
+        auto dir = direction(pointer); // TODO HOPE IT WORKS
+        Field *new_f = from->nextField(dir);
+        if(new_f != nullptr){
+            if(new_f->getPiece() == nullptr || (new_f->getPiece() != nullptr && new_f->getPiece()->getColor() != color_king)){
+                mat = isCheck(new_f, color_king);
+            }
+            if (!mat){
+                return mat;
+            }
+        }
+    }
+    return mat;
 }
 
 void Game::queenCheck(Move *move){
@@ -612,6 +872,11 @@ void Game::knightCheckAllmoves(Move *one_move, Field *to){
 void Game::pieceCheckMove(Field *from, Move *one_move){
     one_move->setFrom(from);
     move(one_move->getFrom(), one_move->getTo());
+
+    if (!checkMat(one_move)){
+        return;
+    }
+
     this->index++;
 }
 
@@ -623,6 +888,11 @@ void Game::kingCheck(Move *one_move){
         if (tmp != nullptr && tmp->getPiece() != nullptr && isKing(tmp->getPiece()) && tmp->getPiece()->getColor() == one_move->getColor()){
             one_move->setFrom(tmp);
             move(one_move->getFrom(), one_move->getTo());
+
+            if (!checkMat(one_move)){
+                return;
+            }
+
             this->index++;
             break;
         }
@@ -678,20 +948,24 @@ void Game::move(Field *from, Field *to){
         delFromIndex();
 
         Move *move = createMove(from, to);
+        if(move != nullptr){
+            if (this->loaded_moves.size() % 2 == 0){
+                move->setColor(WHITE);
+            }else {
+                move->setColor(BLACK);
+            }
 
-        if (this->loaded_moves.size() % 2 == 0){
-            move->setColor(WHITE);
-        }else {
-            move->setColor(BLACK);
+            this->loaded_moves.push_back(move);
+            this->index++;
         }
-
-        this->loaded_moves.push_back(move);
-
+    }else{
+        item = this->board->movePiece(from, to);
+        this->game_end = this->board->game_end;
+        if (item != nullptr){
+            this->history->add(item);
+        }
     }
-    item = this->board->movePiece(from, to);
-    if (item != nullptr){
-        this->history->add(item);
-    }
+
 }
 
 void Game::delFromIndex(){
@@ -726,11 +1000,26 @@ Move* Game::createMove(Field *from, Field *to){
         new_move->setKnight();
     }else if (isRook(from->getPiece())){
         new_move->setRook();
+    }else if (isPawn(from->getPiece())){
+        new_move->setPawn();
     }
 
-    //TODO CHACK AND MAT
+    item = this->board->movePiece(from, to);
+    this->game_end = this->board->game_end;
+    if (item != nullptr) {
+        this->history->add(item);
+        if (!this->game_end){
+            Field *king_field = findKing(to->getPiece()->getColor() == WHITE ? BLACK : WHITE);
+            if (isCheck(king_field, king_field->getPiece()->getColor())){
+                new_move->setCheck();
+            }else if(isMat(king_field, king_field->getPiece()->getColor())){ //TODO NON_WORKING do later
+                new_move->setMat();
+            }
+        }
+        return new_move;
+    }
+    return nullptr;
 
-    return new_move;
 }
 
 

@@ -14,6 +14,7 @@
 #include "../Chess_pieces/Piece.h"
 #include "Field.h"
 #include "HistoryItem.h"
+#include "Move.h"
 
 const int BOARD_SIZE = 8;
 
@@ -28,6 +29,7 @@ private:
     int black_points;
 
 public:
+    bool game_end = false;
 
     Board();
     bool is_white_on_move();

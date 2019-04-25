@@ -11,10 +11,10 @@ using namespace std;
 
 Tab::Tab(){
     this->game = new Game();
-    string all_moves = "1. d4 a5\n"
-                       "2. Dec3 J8f6\n"
-                       "3. d5 c7c6\n"
-                       "4. d5xc6 Jf6h5\n";
+    string all_moves = "1. Jc3 a5\n"
+                       "2. Jd5 J8f6\n"
+                       "3. Jxf6+ c7c6\n"
+                       "4. Dxa5 f7f5\n";
 
     cout << all_moves << endl;
 
@@ -27,11 +27,24 @@ Tab::Tab(){
     next();
     next();
 
-    next();
-    next();
 
-    next();
-    next();
+    Field *f1 = this->game->board->getField(3,3);
+    Field *f2 = this->game->board->getField(5,2);
+    move(f1, f2);
+//
+    f1 = this->game->board->getField(1,1);
+    f2 = this->game->board->getField(1,3);
+    move(f1, f2);
+//
+    f1 = this->game->board->getField(5,2);
+    f2 = this->game->board->getField(4,0);
+    move(f1, f2);
+//
+//    next();
+//    next();
+//
+//    next();
+//    next();
 
 //    next();
 //    next();
@@ -66,14 +79,22 @@ void Tab::prew(){
 }
 
 void Tab::undo(){
-    this->game->undo();
+    if(this->game->isAuto_mode()){
+        this->game->undo();
+    }
 }
 
 void Tab::redo(){
-    this->game->redo();
+    if(this->game->isAuto_mode()){
+        this->game->redo();
+    }
 }
 
 void Tab::move(Field *from, Field *to){
-    this->game->setAuto_mode();
-    this->game->move(from, to);
+    if(from->getPiece() == nullptr){
+        printf("NO PIECE TO MOVE!!!"); // TODO POPUP
+    }else{
+        this->game->setAuto_mode();
+        this->game->move(from, to);
+    }
 }

@@ -41,13 +41,13 @@ HistoryItem* Board::movePiece(Field *from, Field *to){
     if (player != nullptr){
         if (is_white_on_move()){
             if (player->getColor() == BLACK){
-                printf("WHITE IS ON MOVE");
+                printf("WHITE IS ON MOVE\n");
                 // TODO WINDOW POPUP
                 return nullptr;
             }
         }else {
             if (player->getColor()== WHITE){
-                printf("BLACK IS ON MOVE");
+                printf("BLACK IS ON MOVE\n");
                 // TODO WINDOW POPUP
                 return nullptr;
             }
@@ -66,7 +66,7 @@ HistoryItem* Board::movePiece(Field *from, Field *to){
         if (((Rook*)player)->isMoveValid(to->getCol(), to->getRow())){
             moveRook(from, to);
         }else {
-            printf("IS NOT VALID MOVE");
+            printf("IS NOT VALID MOVE\n");
             // TODO WINDOW POPUP
             return nullptr;
         }
@@ -74,7 +74,7 @@ HistoryItem* Board::movePiece(Field *from, Field *to){
         if (((Knight*)player)->isMoveValid(to->getCol(), to->getRow())){
             moveKnight(from, to);
         }else {
-            printf("IS NOT VALID MOVE");
+            printf("IS NOT VALID MOVE\n");
             // TODO WINDOW POPUP
             return nullptr;
         }
@@ -82,7 +82,7 @@ HistoryItem* Board::movePiece(Field *from, Field *to){
         if (((Bishop*)player)->isMoveValid(to->getCol(), to->getRow())){
             moveBishop(from, to);
         }else {
-            printf("IS NOT VALID MOVE");
+            printf("IS NOT VALID MOVE\n");
             // TODO WINDOW POPUP
             return nullptr;
         }
@@ -90,7 +90,7 @@ HistoryItem* Board::movePiece(Field *from, Field *to){
         if (((King*)player)->isMoveValid(to->getCol(), to->getRow())){
             moveKing(from, to);
         }else {
-            printf("IS NOT VALID MOVE");
+            printf("IS NOT VALID MOVE\n");
             // TODO WINDOW POPUP
             return nullptr;
         }
@@ -98,7 +98,7 @@ HistoryItem* Board::movePiece(Field *from, Field *to){
         if (((Queen*)player)->isMoveValid(to->getCol(), to->getRow())){
             moveQueen(from, to);
         }else {
-            printf("IS NOT VALID MOVE");
+            printf("IS NOT VALID MOVE\n");
             // TODO WINDOW POPUP
             return nullptr;
         }
@@ -236,6 +236,10 @@ void Board::move(Field *from, Field *to){
             this->historyItem = new HistoryItem();
             this->historyItem->addValues(from, to, piece_to);
             this->white_on_move = !this->white_on_move;
+            if(isKing(piece_to)){
+                printf("GAME ENDS KING TAKEN\n"); // TODO POPUP
+                this->game_end = true;
+            }
         }
     }else{
         Piece *piece_from = from->removePiece();
@@ -322,11 +326,11 @@ void Board::placePieces(color_piece color){
                 break;
             case 3:
                 // place KING
-                this->board_array[x][y]->putPiece(new King(x, y, color));
+                this->board_array[x][y]->putPiece(new Queen(x, y, color));
                 break;
             case (BOARD_SIZE-4):
                 // place QUEEN
-                this->board_array[x][y]->putPiece(new Queen(x, y, color));
+                this->board_array[x][y]->putPiece(new King(x, y, color));
                 break;
         }
     }

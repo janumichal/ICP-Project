@@ -24,6 +24,7 @@ private:
     bool is_pawn;
     int index;
     bool auto_mode;
+    bool game_end = false;
 public:
     Board *board;
 
@@ -79,6 +80,11 @@ public:
     bool isBody(string coordinates, char sign, int counter);
     int setColumnI(char sign);
     int setRowI(char sign);
+    Field *findKing(color_piece );
+    bool checkMat(Move *);
+    bool isMat(Field *, color_piece );
+    bool isCheck(Field *, color_piece );
+    bool controlEX(Field *, color_piece , char );
 
 };
 
