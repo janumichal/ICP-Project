@@ -19,7 +19,9 @@ Tab::Tab(){
     cout << all_moves << endl;
 
 
-    this->game->loadAllMoves(all_moves);
+    loadAllMoves(all_moves);
+    newGame();
+    start_auto();
 
     next();
     next();
@@ -35,10 +37,23 @@ Tab::Tab(){
     f1 = this->game->board->getField(1,1);
     f2 = this->game->board->getField(1,3);
     move(f1, f2);
+
+
+    newGame();
+    start_auto();
+
+    next();
+    next();
+
+    next();
+    next();
+
+    next();
+    next();
 //
-    f1 = this->game->board->getField(5,2);
-    f2 = this->game->board->getField(4,0);
-    move(f1, f2);
+//    f1 = this->game->board->getField(5,2);
+//    f2 = this->game->board->getField(4,0);
+//    move(f1, f2);
 //
 //    next();
 //    next();
@@ -94,7 +109,21 @@ void Tab::move(Field *from, Field *to){
     if(from->getPiece() == nullptr){
         printf("NO PIECE TO MOVE!!!"); // TODO POPUP
     }else{
-        this->game->setAuto_mode();
+        this->game->setAuto_modeON();
         this->game->move(from, to);
     }
+}
+
+void Tab::start_auto(){
+    this->game->setAuto_modeON();
+    this->game->setIndex(0);
+}
+
+void Tab::loadAllMoves(string moves_input) {
+    this->game->loadAllMoves(moves_input);
+}
+
+void Tab::newGame() {
+    this->game->board->cleanBoard();
+    this->game->board->fillBoard();
 }

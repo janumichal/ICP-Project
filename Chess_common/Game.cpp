@@ -13,15 +13,18 @@ Game::Game(){
     board->fillBoard();
     this->history = new History();
     this->is_pawn = false;
-    this->auto_mode = true;
 }
 
 bool Game::isAuto_mode() {
     return this->auto_mode;
 }
 
-void Game::setAuto_mode() {
+void Game::setAuto_modeOFF() {
     this->auto_mode = false;
+}
+
+void Game::setAuto_modeON() {
+    this->auto_mode = true;
 }
 
 void Game::prew(){
@@ -46,10 +49,13 @@ void Game::applyMove(){
 
 
 void Game::fullFormat(Move *one_move){
-    if ((one_move->isTake() && one_move->getTo()->getPiece() != nullptr) || (!one_move->isTake() && one_move->getTo()->getPiece() == nullptr)){
-        if (one_move->isPawn() && isPawn(one_move->getFrom()->getPiece())) {
+    Field *from = this->board->getField(one_move->getFrom()->getCol(), one_move->getFrom()->getRow());
+    Field *to = this->board->getField(one_move->getTo()->getCol(), one_move->getTo()->getRow());
+
+    if ((one_move->isTake() && to->getPiece() != nullptr) || (!one_move->isTake() && to->getPiece() == nullptr)){
+        if (one_move->isPawn() && isPawn(from->getPiece())) {
             if (one_move->getExchange() == '\0'){
-                move(one_move->getFrom(), one_move->getTo());
+                move(from, to);
 
                 if (!checkMat(one_move)){
                     return;
@@ -57,16 +63,16 @@ void Game::fullFormat(Move *one_move){
 
                 this->index++;
             }else{
-                if ((one_move->getFrom()->getPiece() != nullptr && one_move->getFrom()->getPiece()->getColor() == WHITE && one_move->getTo()->getRow() == 0)||(one_move->getFrom()->getPiece() != nullptr && one_move->getFrom()->getPiece()->getColor() == BLACK && one_move->getTo()->getRow() == 7)){
+                if ((from->getPiece() != nullptr && from->getPiece()->getColor() == WHITE && to->getRow() == 0)||(from->getPiece() != nullptr && from->getPiece()->getColor() == BLACK && to->getRow() == 7)){
                     if (this->board->is_white_on_move()){
-                        if (one_move->getFrom()->getPiece()->getColor() == WHITE){
+                        if (from->getPiece()->getColor() == WHITE){
                             exchange(one_move);
                         }else {
                             // TODO POPUP
                             printf("MOVE WITH WRONG COLOR\n");
                         }
                     }else {
-                        if (one_move->getFrom()->getPiece()->getColor() == BLACK){
+                        if (from->getPiece()->getColor() == BLACK){
                             exchange(one_move);
                         }else {
                             // TODO POPUP
@@ -77,40 +83,40 @@ void Game::fullFormat(Move *one_move){
                     printf("WRONGLY FORMATED MOVE WRONG PLACE\n"); // TODO POPUP
                 }
             }
-        }else if (one_move->isKnight() && isKnight(one_move->getFrom()->getPiece())) {
-            move(one_move->getFrom(), one_move->getTo());
+        }else if (one_move->isKnight() && isKnight(from->getPiece())) {
+            move(from, to);
 
             if (!checkMat(one_move)){
                 return;
             }
 
             this->index++;
-        }else if (one_move->isKing() && isKing(one_move->getFrom()->getPiece())){
-            move(one_move->getFrom(), one_move->getTo());
+        }else if (one_move->isKing() && isKing(from->getPiece())){
+            move(from, to);
 
             if (!checkMat(one_move)){
                 return;
             }
 
             this->index++;
-        }else if (one_move->isQueen() && isQueen(one_move->getFrom()->getPiece())){
-            move(one_move->getFrom(), one_move->getTo());
+        }else if (one_move->isQueen() && isQueen(from->getPiece())){
+            move(from, to);
 
             if (!checkMat(one_move)){
                 return;
             }
 
             this->index++;
-        }else if (one_move->isBishop() && isBishop(one_move->getFrom()->getPiece())){
-            move(one_move->getFrom(), one_move->getTo());
+        }else if (one_move->isBishop() && isBishop(from->getPiece())){
+            move(from, to);
 
             if (!checkMat(one_move)){
                 return;
             }
 
             this->index++;
-        }else if (one_move->isRook() && isRook(one_move->getFrom()->getPiece())){
-            move(one_move->getFrom(), one_move->getTo());
+        }else if (one_move->isRook() && isRook(from->getPiece())){
+            move(from, to);
 
             if (!checkMat(one_move)){
                 return;
@@ -123,6 +129,10 @@ void Game::fullFormat(Move *one_move){
     }else {
         printf("WRONGLY FORMATED MOVE\n");
     }
+}
+
+void Game::setIndex(int i){
+    this->index = i;
 }
 
 

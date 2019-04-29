@@ -18,6 +18,9 @@ public:
     void undo();
     void redo();
     void move(Field *from, Field *to);
+    void start_auto();
+    void loadAllMoves(string moves_input);
+    void newGame();
 
 };
 

@@ -49,6 +49,7 @@ private:
 
 public:
     void moveHistory(Field *, Field *, Piece *, Piece *);
+    void cleanBoard();
 
 
     //############################################# CREATING BOARD #####################################################

@@ -250,6 +250,14 @@ void Board::move(Field *from, Field *to){
     }
 }
 
+void Board::cleanBoard(){
+    for (int x = 0; x < BOARD_SIZE; x++){
+        for (int y = 0; y < BOARD_SIZE; y++){
+            this->board_array[x][y]->putPiece(nullptr);
+        }
+    }
+}
+
 void Board::moveHistory(Field *from, Field *to, Piece *target, Piece *exchange){
     Piece *piece = to->removePiece();
     if (exchange == nullptr){

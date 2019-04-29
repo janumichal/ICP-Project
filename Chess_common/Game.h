@@ -30,7 +30,8 @@ public:
 
     Game();
     bool isAuto_mode();
-    void setAuto_mode();
+    void setAuto_modeOFF();
+    void setAuto_modeON();
     void prew();
     void next();
     void applyMove();
@@ -85,7 +86,7 @@ public:
     bool isMat(Field *, color_piece );
     bool isCheck(Field *, color_piece );
     bool controlEX(Field *, color_piece , char );
-
+    void setIndex(int);
 };
 
 #endif //CPP_CHESS_GAME_H
