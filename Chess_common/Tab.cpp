@@ -50,6 +50,8 @@ Tab::Tab(){
 
     next();
     next();
+
+
 //
 //    f1 = this->game->board->getField(5,2);
 //    f2 = this->game->board->getField(4,0);
