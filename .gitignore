@@ -52,3 +52,4 @@ cmake-build-debug/CMakeFiles/CPP-Chess.dir/Chess_common/HistoryItem.cpp.o
 cmake-build-debug/CMakeFiles/CPP-Chess.dir/Chess_common/Move.cpp.o
 cmake-build-debug/CMakeFiles/CPP-Chess.dir/Chess_common/others.cpp.o
 cmake-build-debug/CMakeFiles/CPP-Chess.dir/Chess_common/Tab.cpp.o
+*.o
