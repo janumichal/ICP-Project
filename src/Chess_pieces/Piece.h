@@ -1,4 +1,4 @@
-/*!
+/**
  * @authors Michal Janů (xjanum03), Richard Gajda (xgajda06)
  */
 
@@ -15,7 +15,7 @@ protected:
     char name;
 
 public:
-    /*!
+    /**
      * @brief Class for Original piece
      * @param x Vertical location of piece.
      * @param y Horizontal location of piece.
@@ -31,7 +31,7 @@ public:
         this->name = name;
     }
 
-    /*!
+    /**
      * @brief Getter for piece value.
      * @return value of piece
      */
@@ -39,7 +39,7 @@ public:
         return this->value_of_piece;
     }
 
-    /*!
+    /**
      * @brief Getter for piece color.
      * @return color of piece
      */
@@ -47,21 +47,21 @@ public:
         return this->color;
     }
 
-    /*!
+    /**
      * @brief Setter for column.
      */
     void setCol(int x){
         this->x = x;
     }
 
-    /*!
+    /**
      * @brief Setter for row.
      */
     void setRow(int y){
         this->y = y;
     }
 
-    /*!
+    /**
      * @brief Getter for piece name.
      * @return name of piece
      */

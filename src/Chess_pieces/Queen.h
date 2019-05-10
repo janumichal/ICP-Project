@@ -1,4 +1,4 @@
-/*!
+/**
  * @authors Michal Janů (xjanum03), Richard Gajda (xgajda06)
  */
 
@@ -9,7 +9,7 @@
 
 class Queen : public Piece{
 public:
-    /*!
+    /**
     * @brief Class for Queen piece.
     * @param x Vertical location of piece.
     * @param y Horizontal location of piece.
@@ -17,7 +17,7 @@ public:
     */
     Queen(int x, int y, color_piece color) : Piece(x, y, 9, color, 'q'){}
 
-    /*!
+    /**
      * @brief Checks if move is valid for Queen.
      * @param x Vertical location that piece has to move on.
      * @param y Horizontal location that piece has to move on.

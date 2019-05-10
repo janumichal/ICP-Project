@@ -1,4 +1,4 @@
-/*!
+/**
  * @authors Michal Janů (xjanum03), Richard Gajda (xgajda06)
  */
 
@@ -9,7 +9,7 @@
 
 class Rook : public Piece{
 public:
-    /*!
+    /**
      * @brief Class for Rook piece.
      * @param x Vertical location of piece.
      * @param y Horizontal location of piece.
@@ -17,7 +17,7 @@ public:
      */
     Rook(int x, int y, color_piece color) : Piece(x, y, 5, color, 'r'){}
 
-    /*!
+    /**
      * @brief Checks if move is valid for Rook.
      * @param x Vertical location that piece has to move on.
      * @param y Horizontal location that piece has to move on.

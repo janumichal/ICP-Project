@@ -1,6 +1,6 @@
-//
-// Created by janum on 24.04.2019.
-//
+/*!
+ * @authors Michal Janů (xjanum03), Richard Gajda (xgajda06)
+ */
 
 #include "HistoryItem.h"
 

@@ -1,4 +1,4 @@
-/*!
+/**
  * @authors Michal Janů (xjanum03), Richard Gajda (xgajda06)
  */
 
@@ -11,7 +11,7 @@ class Pawn : public Piece{
 private:
     bool is_on_starting_position = true;
 public:
-    /*!
+    /**
      * @brief Class for Pawn piece.
      * @param x Vertical location of piece.
      * @param y Horizontal location of piece.
@@ -19,7 +19,7 @@ public:
      */
     Pawn(int x, int y, color_piece color) : Piece(x, y, 1, color, 'p'){}
 
-    /*!
+    /**
      * @brief Checks if move is valid for Pawn.
      * @param x Vertical location that piece has to move on.
      * @param y Horizontal location that piece has to move on.
@@ -50,7 +50,7 @@ public:
         }
     }
 
-    /*!
+    /**
      * @brief Checks if piece is on starting position.
      * @return Is on starting position.
      */
@@ -58,7 +58,7 @@ public:
         return this->is_on_starting_position;
     }
 
-    /*!
+    /**
      * @brief Sets is_on_starting_position as false.
      */
     void setNotOnStart(){

@@ -1,4 +1,4 @@
-/*!
+/**
  * @authors Michal Janů (xjanum03), Richard Gajda (xgajda06)
  */
 
@@ -10,7 +10,7 @@
 
 class Bishop : public Piece {
 public:
-    /*!
+    /**
      * @brief Class for Bishop piece.
      * @param x Vertical location of piece.
      * @param y Horizontal location of piece.
@@ -18,7 +18,7 @@ public:
      */
     Bishop(int x, int y, color_piece color) : Piece(x,y,3,color, 'b'){}
 
-    /*!
+    /**
      * @brief Checks if move is valid for Bishop.
      * @param x Vertical location that piece has to move on.
      * @param y Horizontal location that piece has to move on.

@@ -1,4 +1,4 @@
-/*!
+/**
  * @authors Michal Janů (xjanum03), Richard Gajda (xgajda06)
  */
 
@@ -31,39 +31,154 @@ private:
 public:
     bool game_end = false;
 
+    /**
+     * @brief Creates instance of board.
+     */
     Board();
+
+    /**
+     * @brief Check if is white on move.
+     * @return if white on move.
+     */
     bool is_white_on_move();
+
+    /**
+     * @brief Prints out the points
+     */
     void printPoints();
-    Field* getField(int, int);
-    HistoryItem* movePiece(Field *, Field *);
+
+    /**
+     * @brief get field from 2D array on position [x][y]
+     * @param x Vertical position
+     * @param y Horizontal position
+     * @return field on position
+     */
+    Field* getField(int x, int y);
+
+    /**
+     * @brief moves piece from to to and saves move to history
+     * @param from field from
+     * @param to field to
+     * @return history item
+     */
+    HistoryItem* movePiece(Field *from, Field *to);
 
 private:
-    void moveBishop(Field *, Field *);
-    void moveQueen(Field *, Field *);
-    void moveKing(Field *, Field *);
-    void moveRook(Field *, Field *);
-    void moveInDir(direction , Field *, Field *);
-    void movePawn(Field *, Field *);
+    /**
+     * @brief moves Bishop from field from to field to
+     * @param from field from
+     * @param to field to
+     */
+    void moveBishop(Field *from, Field *to);
+
+    /**
+     * @brief moves Queen from field from to field to
+     * @param from field from
+     * @param to field to
+     */
+    void moveQueen(Field *from, Field *to);
+
+    /**
+     * @brief moves King from field from to field to
+     * @param from field from
+     * @param to field to
+     */
+    void moveKing(Field *from, Field *to);
+
+    /**
+     * @brief moves Rook from field from to field to
+     * @param from field from
+     * @param to field to
+     */
+    void moveRook(Field *from, Field *to);
+
+    /**
+     * @brief moves piece in direction
+     * @param direction direction to go to
+     * @param from field from
+     * @param to field to
+     */
+    void moveInDir(direction direction, Field *from, Field *to);
+
+    /**
+     * @brief moves Pawn from field from to field to
+     * @param from field from
+     * @param to field to
+     */
+    void movePawn(Field *from, Field *to);
+
+    /**
+     * @brief moves Knight from field from to field to
+     * @param from field from
+     * @param to field to
+     */
     void moveKnight(Field *from, Field *to);
-    void move(Field *, Field *);
+
+    /**
+     * @brief move from field from to field to
+     * @param from field from
+     * @param to field to
+     */
+    void move(Field *from, Field *to);
 
 public:
-    void moveHistory(Field *, Field *, Piece *, Piece *);
+    /**
+     * @brief applayes history item and specified move
+     * @param from field from
+     * @param to field to
+     * @param target piece that has been taken (null if doesnt exist)
+     * @param exchange for what was exchenged (empty if not)
+     */
+    void moveHistory(Field *from, Field *to, Piece *target, Piece *exchange);
+
+    /**
+     * @brief cleans board of everything
+     */
     void cleanBoard();
 
 
     //############################################# CREATING BOARD #####################################################
     // show piece placement in text mode
+    /**
+     * @brief Displays piece placement in console
+     */
     void showPiecesText();
+
+    /**
+     * @brief fills board on starting point
+     */
     void fillBoard();
-    void placePieces(color_piece );
+
+    /**
+     * @brief places pieces of specified color
+     * @param color specified color
+     */
+    void placePieces(color_piece color);
 
 private:
+    /**
+     * @brief fills enum map in field
+     */
     void fillArrayAround();
+
+    /**
+     * @brief checks if position is still in array
+     * @param x position x
+     * @param y position y
+     * @return if is inside array
+     */
     bool isInArray(int x, int y);
 
 public:
+    /**
+     * @brief get points of white player
+     * @return points
+     */
     int getWhite_points();
+    /**
+     * @brief get points of black player
+     * @return points
+     */
     int getBlack_points();
 
 };
