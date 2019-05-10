@@ -1,6 +1,6 @@
-//
-// Created by janum on 11.04.2019.
-//
+/*!
+ * @authors Michal Janů (xjanum03), Richard Gajda (xgajda06)
+ */
 
 #ifndef CPP_CHESS_QUEEN_H
 #define CPP_CHESS_QUEEN_H
@@ -9,7 +9,20 @@
 
 class Queen : public Piece{
 public:
+    /*!
+    * @brief Class for Queen piece.
+    * @param x Vertical location of piece.
+    * @param y Horizontal location of piece.
+    * @param color Color of piece.
+    */
     Queen(int x, int y, color_piece color) : Piece(x, y, 9, color, 'q'){}
+
+    /*!
+     * @brief Checks if move is valid for Queen.
+     * @param x Vertical location that piece has to move on.
+     * @param y Horizontal location that piece has to move on.
+     * @return Is valid.
+     */
     bool isMoveValid(int x, int y){
         int array_size = 8; //TODO CHANGE FOR BOARDSIZE
 
