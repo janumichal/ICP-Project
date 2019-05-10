@@ -19,7 +19,6 @@
 const int BOARD_SIZE = 8;
 
 using namespace std;
-
 class Board {
 private:
     Field* board_array[BOARD_SIZE][BOARD_SIZE];

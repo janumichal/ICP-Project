@@ -349,9 +349,9 @@ public:
     bool validFormat(string coordinates);
 
     /**
-     *
-     * @param Character
-     * @return
+     * @brief if is valid character
+     * @param Character the character
+     * @return if is valid
      */
     bool isValidSign(char Character);
 
