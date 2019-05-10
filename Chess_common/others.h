@@ -1,6 +1,6 @@
-//
-// Created by janum on 24.04.2019.
-//
+/*!
+ * @authors Michal Janů (xjanum03), Richard Gajda (xgajda06)
+ */
 
 #ifndef CPP_CHESS_STRING_WORK_H
 #define CPP_CHESS_STRING_WORK_H

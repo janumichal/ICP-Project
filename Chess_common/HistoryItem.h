@@ -1,14 +1,13 @@
-#include <utility>
-
-//
-// Created by janum on 11.04.2019.
-//
+/*!
+ * @authors Michal Janů (xjanum03), Richard Gajda (xgajda06)
+ */
 
 #ifndef CPP_CHESS_HISTORYITEM_H
 #define CPP_CHESS_HISTORYITEM_H
 
 #include "../Chess_pieces/Piece.h"
 #include "Field.h"
+#include <utility>
 
 using namespace std;
 

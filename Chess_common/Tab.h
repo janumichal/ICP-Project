@@ -1,6 +1,6 @@
-//
-// Created by janum on 23.04.2019.
-//
+/*!
+ * @authors Michal Janů (xjanum03), Richard Gajda (xgajda06)
+ */
 
 #ifndef CPP_CHESS_TAB_H
 #define CPP_CHESS_TAB_H
