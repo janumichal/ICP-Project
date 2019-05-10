@@ -12,14 +12,52 @@ using namespace std;
 class Tab {
     Game *game;
 public:
+    /**
+     * @brief Creates instance of Tab.
+     */
     Tab();
+
+    /**
+     * @brief Next move in Auto mode.
+     */
     void next();
+
+    /**
+     * @brief Preview move in Auto mode.
+     */
     void prew();
+
+    /**
+     * @brief Undo move in Manual mode.
+     */
     void undo();
+
+    /**
+     * @brief Redo move in Manual mode
+     */
     void redo();
+
+    /**
+     * @brief moves piece from field from to field to.
+     * @param from Moves from.
+     * @param to Moves to.
+     */
     void move(Field *from, Field *to);
+
+    /**
+     * @brief starts Automatic mode.
+     */
     void start_auto();
+
+    /**
+     * @brief Loads all moves from string
+     * @param moves_input string moves are being load from.
+     */
     void loadAllMoves(string moves_input);
+
+    /**
+     * @brief Creates new game.
+     */
     void newGame();
 
 };

@@ -81,12 +81,12 @@ public:
     bool isBody(string coordinates, char sign, int counter);
     int setColumnI(char sign);
     int setRowI(char sign);
-    Field *findKing(color_piece );
-    bool checkMat(Move *);
-    bool isMat(Field *, color_piece );
-    bool isCheck(Field *, color_piece );
-    bool controlEX(Field *, color_piece , char );
-    void setIndex(int);
+    Field *findKing(color_piece color);
+    bool checkMat(Move *one_move);
+    bool isMat(Field *from, color_piece color_king);
+    bool isCheck(Field *from, color_piece color_king);
+    bool controlEX(Field *f, color_piece color, char piece);
+    void setIndex(int i);
 };
 
 #endif //CPP_CHESS_GAME_H
