@@ -16,12 +16,11 @@ run:
 	./chess
 
 clean:
-	rm -rf doc/html
-	rm -rf *.o chess
+	rm -rf doc/html *.o chess *.zip
 
 doxygen:
 	doxygen src/doxyconf
 
-pack:
+pack: clean
 	zip -r xjanum03-xgajda06.zip doc examples src Makefile README.txt
 
