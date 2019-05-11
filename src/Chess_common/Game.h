@@ -15,7 +15,9 @@
 #include "others.h"
 
 using namespace std;
-
+/**
+ * @brief Class for Game
+ */
 class Game{
 private:
     History *history;
@@ -26,6 +28,9 @@ private:
     bool auto_mode;
     bool game_end = false;
 public:
+    /**
+     * @brief Board with pieces
+     */
     Board *board;
 
 
@@ -188,7 +193,7 @@ public:
 
     /**
      * @brief Check valid moves for Knight.
-     * @param move move with coordinates.
+     * @param one_move move with coordinates.
      */
     void knightCheck(Move *one_move);
 
@@ -238,13 +243,14 @@ public:
 
     /**
      * @brief Check valid moves for King.
-     * @param move move with coordinates.
+     * @param one_move move with coordinates.
      */
     void kingCheck(Move *one_move);
 
     /**
      * @brief Check valid moves for Pawn.
-     * @param move move with coordinates.
+     * @param dir whitch direction pice moves in
+     * @param one_move move with coordinates.
      */
     void pawnCheck(direction dir, Move *one_move);
 

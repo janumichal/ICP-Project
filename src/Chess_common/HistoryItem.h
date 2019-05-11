@@ -11,6 +11,9 @@
 
 using namespace std;
 
+/**
+ * @brief Class for History Item
+ */
 class HistoryItem{
 private:
     Field* from;

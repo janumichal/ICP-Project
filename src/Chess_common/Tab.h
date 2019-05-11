@@ -9,6 +9,9 @@
 
 using namespace std;
 
+/**
+ * @brief Class for Tab
+ */
 class Tab {
     Game *game;
 public:

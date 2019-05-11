@@ -11,6 +11,9 @@
 
 using namespace std;
 
+/**
+ * @brief Class for Field
+ */
 class Field{
 private:
     int row{};
@@ -48,7 +51,7 @@ public:
 
     /**
      * @brief Setter for row.
-     * @param col Row that is being set.
+     * @param row Row that is being set.
      */
     void setRow(int row);
 

@@ -9,9 +9,28 @@
 
 class Piece{
 protected:
-    int x,y;
+    /**
+     * @brief x position of piece
+     */
+    int x;
+    /**
+     * @brief x position of piece
+     */
+    int y;
+
+    /**
+     * @brief Color of piece
+     */
     color_piece color;
+
+    /**
+     * @brief value of piece
+     */
     int value_of_piece;
+
+    /**
+     * @brief name of piece
+     */
     char name;
 
 public:

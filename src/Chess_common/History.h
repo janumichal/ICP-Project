@@ -10,6 +10,9 @@
 
 using namespace std;
 
+/**
+ * @brief Class for History
+ */
 class History{
 private:
     vector<HistoryItem*> array;

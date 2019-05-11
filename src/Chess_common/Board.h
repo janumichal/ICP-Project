@@ -19,6 +19,10 @@
 const int BOARD_SIZE = 8;
 
 using namespace std;
+
+/**
+ * @brief Class for Board
+ */
 class Board {
 private:
     Field* board_array[BOARD_SIZE][BOARD_SIZE];
@@ -28,6 +32,9 @@ private:
     int black_points;
 
 public:
+    /**
+     * @brief Checks if game ended
+     */
     bool game_end = false;
 
     /**

@@ -10,6 +10,9 @@
 
 using namespace std;
 
+/**
+ * @brief Class for Move
+ */
 class Move{
 private:
     Field *from;
@@ -196,13 +199,13 @@ public:
 
     /**
      * @brief Setter for row in move in character form.
-     * @param column Row on board.
+     * @param row Row on board.
      */
     void setRow(char row);
 
     /**
      * @brief Setter for row in move in numeric form.
-     * @param column Row on board.
+     * @param row Row on board.
      */
     void setRow(int row);
 
