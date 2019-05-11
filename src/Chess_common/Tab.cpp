@@ -9,79 +9,82 @@
 
 using namespace std;
 
-Tab::Tab(){
+Tab::Tab() {
     this->game = new Game();
-    string all_moves = "1. Jc3 a5\n"
-                       "2. Jd5 J8f6\n"
-                       "3. Jxf6+ c7c6\n"
-                       "4. Dxa5 f7f5\n";
-
-    cout << all_moves << endl;
-
-
-    loadAllMoves(all_moves);
     newGame();
-    start_auto();
+}
 
-    next();
-    next();
-
-    next();
-    next();
-
-
-    Field *f1 = this->game->board->getField(3,3);
-    Field *f2 = this->game->board->getField(5,2);
-    move(f1, f2);
+//    string all_moves = "1. Jc3 a5\n"
+//                       "2. Jd5 J8f6\n"
+//                       "3. Jxf6+ c7c6\n"
+//                       "4. Dxa5 f7f5\n";
 //
-    f1 = this->game->board->getField(1,1);
-    f2 = this->game->board->getField(1,3);
-    move(f1, f2);
-
-
-    newGame();
-    start_auto();
-
-    next();
-    next();
-
-    next();
-    next();
-
-    next();
-    next();
-
-
+//    cout << all_moves << endl;
 //
-//    f1 = this->game->board->getField(5,2);
-//    f2 = this->game->board->getField(4,0);
+//
+//    loadAllMoves(all_moves);
+//    newGame();
+//    start_auto();
+//
+//    next();
+//    next();
+//
+//    next();
+//    next();
+//
+//
+//    Field *f1 = this->game->board->getField(3,3);
+//    Field *f2 = this->game->board->getField(5,2);
+//    move(f1, f2);
+////
+//    f1 = this->game->board->getField(1,1);
+//    f2 = this->game->board->getField(1,3);
 //    move(f1, f2);
 //
+//
+//    newGame();
+//    start_auto();
+//
 //    next();
 //    next();
 //
 //    next();
 //    next();
-
+//
 //    next();
 //    next();
 //
-//    next();
-
-
-//        Field f1 = this.game.board.getField(2,4);
-//        Field f2 = this.game.board.getField(3,3);
-//        move(f1,f2);
-
-
-    this->game->board->printPoints();
-
-    cout << endl;
-    this->game->printAllMoves();
-
-
-    this->game->board->showPiecesText();
-}
+//
+////
+////    f1 = this->game->board->getField(5,2);
+////    f2 = this->game->board->getField(4,0);
+////    move(f1, f2);
+////
+////    next();
+////    next();
+////
+////    next();
+////    next();
+//
+////    next();
+////    next();
+////
+////    next();
+//
+//
+////        Field f1 = this.game.board.getField(2,4);
+////        Field f2 = this.game.board.getField(3,3);
+////        move(f1,f2);
+//
+//
+//    this->game->board->printPoints();
+//
+//    cout << endl;
+//    this->game->printAllMoves();
+//
+//
+//    this->game->board->showPiecesText();
+//}
 
 void Tab::next(){
     if(this->game->isAuto_mode()){
