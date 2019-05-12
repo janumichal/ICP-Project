@@ -270,6 +270,7 @@ void Board::moveHistory(Field *from, Field *to, Piece *target, Piece *exchange){
         }
     }
     to->putPiece(target);
+    this->white_on_move = !this->white_on_move;
 }
 
 //############################################# CREATING BOARD #####################################################

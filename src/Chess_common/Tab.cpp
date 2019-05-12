@@ -129,6 +129,8 @@ void Tab::loadAllMoves(string moves_input) {
 }
 
 void Tab::newGame() {
+    this->game->setIndex(0);
+    this->game->board->white_on_move = true;
     this->game->board->cleanBoard();
     this->game->board->fillBoard();
 }

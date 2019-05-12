@@ -28,8 +28,10 @@ void Game::setAuto_modeON() {
 }
 
 void Game::prew(){
-    undo();
-    this->index--;
+    if(this->index < 1){
+    }else{
+        undo();
+    }
 }
 
 void Game::next(){
@@ -1019,11 +1021,13 @@ Move* Game::createMove(Field *from, Field *to){
     if (item != nullptr) {
         this->history->add(item);
         if (!this->game_end){
-            Field *king_field = findKing(to->getPiece()->getColor() == WHITE ? BLACK : WHITE);
-            if (isCheck(king_field, king_field->getPiece()->getColor())){
-                new_move->setCheck();
-            }else if(isMat(king_field, king_field->getPiece()->getColor())){ //TODO NON_WORKING do later
-                new_move->setMat();
+            if(to->getPiece() != nullptr){
+                Field *king_field = findKing(to->getPiece()->getColor() == WHITE ? BLACK : WHITE);
+                if (isCheck(king_field, king_field->getPiece()->getColor())){
+                    new_move->setCheck();
+                }else if(isMat(king_field, king_field->getPiece()->getColor())){ //TODO NON_WORKING do later
+                    new_move->setMat();
+                }
             }
         }
         return new_move;
@@ -1048,7 +1052,7 @@ void Game::undo(){
         Field *to = item->getTo();
         Piece *target = item->getTarget_to();
         Piece *exchange = item->getExchange();
-
+        this->index--;
         board->moveHistory(from, to, target, exchange);
     }
 }
@@ -1059,7 +1063,7 @@ void Game::redo(){
         Field *from = item->getFrom();
         Field *to = item->getTo();
         Piece *exchange = item->getExchange();
-
+        this->index++;
         board->moveHistory(to, from, nullptr, exchange);
     }
 }

@@ -27,11 +27,14 @@ class Board {
 private:
     Field* board_array[BOARD_SIZE][BOARD_SIZE];
     HistoryItem *historyItem;
-    bool white_on_move;
     int white_points;
     int black_points;
 
 public:
+    /**
+     * @brief is white one move
+     */
+    bool white_on_move;
     /**
      * @brief Checks if game ended
      */
