@@ -307,8 +307,9 @@ public:
 
     /**
      * @brief Prints all saved moves to console.
+     * @return string with all moves
      */
-    void printAllMoves();
+    string printAllMoves();
 
     /**
      * @brief check format of one move

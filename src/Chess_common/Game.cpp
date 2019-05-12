@@ -1112,7 +1112,8 @@ void Game::loadAllMoves(const string &all_moves){
     }
 }
 
-void Game::printAllMoves(){
+string Game::printAllMoves(){
+    string all_moves;
     int counter = 1;
     int arr_size = (int)this->loaded_moves.size();
     for (int idx = 0; idx < arr_size ; idx++){
@@ -1120,15 +1121,19 @@ void Game::printAllMoves(){
         bool even = idx % 2 == 0;
         string move = this->loaded_moves[idx]->pritnMove();
         if (even){
-            cout << to_string(counter) + ". " + move + " ("+ to_string(idx) + ") ";
+            all_moves.append(to_string(counter) + ". " + move + " ");
+//            cout << to_string(counter) + ". " + move + " ("+ to_string(idx) + ") ";
             if (idx+1 == arr_size){
-                cout << endl;
+                all_moves.append("\n");
+//                cout << endl;
             }
         }else {
-            cout << move + " (" + to_string(idx) + ") \n";
+            all_moves.append(move + "\n");
+//            cout << move + " (" + to_string(idx) + ") \n";
             counter++;
         }
     }
+    return all_moves;
 }
 
 Move* Game::formatMove(string coordinates){
