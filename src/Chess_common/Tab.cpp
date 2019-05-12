@@ -4,6 +4,7 @@
 
 #include "Tab.h"
 #include <iostream>
+#include <fstream>
 
 #include "others.h"
 
@@ -13,110 +14,76 @@ Tab::Tab() {
     this->game = new Game();
     newGame();
 }
-//
-//    string all_moves = "1. Jc3 a5\n"
-//                       "2. Jd5 J8f6\n"
-//                       "3. Jxf6+ c7c6\n"
-//                       "4. Dxa5 f7f5\n";
-//
-////    cout << all_moves << endl;
-//
-//
-//    loadAllMoves(all_moves);
-//    newGame();
-//    start_auto();
-//
-//    next();
-//    next();
-//
-//    next();
-//    next();
-//
-//
-//    Field *f1 = this->game->board->getField(3,3);
-//    Field *f2 = this->game->board->getField(5,2);
-//    move(f1, f2);
-////
-//    f1 = this->game->board->getField(1,1);
-//    f2 = this->game->board->getField(1,3);
-//    move(f1, f2);
-//
-//
-//    newGame();
-//    start_auto();
-//
-//    next();
-//    next();
-//
-//    next();
-//    next();
-//
-//    next();
-//    next();
-//
-//
-////
-////    f1 = this->game->board->getField(5,2);
-////    f2 = this->game->board->getField(4,0);
-////    move(f1, f2);
-////
-////    next();
-////    next();
-////
-////    next();
-////    next();
-//
-////    next();
-////    next();
-////
-////    next();
-//
-//
-////        Field f1 = this.game.board.getField(2,4);
-////        Field f2 = this.game.board.getField(3,3);
-////        move(f1,f2);
-//
-//
-//    this->game->board->printPoints();
-//
-//    cout << endl;
-//    cout << this->game->printAllMoves() << endl;
-//
-//
-//    this->game->board->showPiecesText();
-//}
+
+void Tab::Load(const string &url){
+    ifstream input(url);
+    string str;
+    for( std::string line; getline( input, line ); )
+    {
+        str.append(line);
+        str.append("\n");
+    }
+    this->loadAllMoves(str);
+}
+
+void Tab::PrintGame(){
+    this->game->board->printPoints();
+    cout << endl;
+    cout << this->game->printAllMoves() << endl;
+    this->game->board->showPiecesText();
+}
 
 void Tab::next(){
     if(this->game->isAuto_mode()){
         this->game->next();
     }
+    PrintGame();
 }
 
 void Tab::prew(){
     if(this->game->isAuto_mode()){
         this->game->prew();
     }
+    PrintGame();
 }
 
 void Tab::undo(){
-    if(this->game->isAuto_mode()){
+    if(!this->game->isAuto_mode()){
         this->game->undo();
+        PrintGame();
     }
 }
 
 void Tab::redo(){
-    if(this->game->isAuto_mode()){
+    if(!this->game->isAuto_mode()){
         this->game->redo();
     }
+    PrintGame();
+}
+
+void Tab::Move(string from, string to){
+    if(from.length() != 2 || to.length() != 2){
+        cout << "WROND POSITION" << endl;
+    }
+    int col_from = ((int)from[0] - 97);
+    int row_from = 8 - ((int)from[1] - 48);
+
+    int col_to = ((int)to[0] - 97);
+    int row_to = 8 - ((int)to[1] - 48);
+
+    Field *f1 = this->game->board->getField(col_from, row_from);
+    Field *f2 = this->game->board->getField(col_to, row_to);
+    this->move(f1,f2);
 }
 
 void Tab::move(Field *from, Field *to){
     if(from->getPiece() == nullptr){
         printf("NO PIECE TO MOVE!!!"); // TODO POPUP
     }else{
-        this->game->setAuto_modeON();
+        this->game->setAuto_modeOFF();
         this->game->move(from, to);
     }
+    PrintGame();
 }
 
 void Tab::start_auto(){

@@ -11,6 +11,7 @@ make doxygen (vygeneruje doxygen do složky doc)
 POZNÁMKA:
 Backend je hotový celý šachy jsou funkční pouze chybí GUI.
 
+
 TÝM:
 Michal janů (xjanum03)      - Backend aplikace
 Richard Gajda (xgajda06)    - Frontend aplikace (GUI)

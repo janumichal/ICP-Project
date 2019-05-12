@@ -276,23 +276,50 @@ void Board::moveHistory(Field *from, Field *to, Piece *target, Piece *exchange){
 //############################################# CREATING BOARD #####################################################
 // show piece placement in text mode
 void Board::showPiecesText(){
-    printf("---------------------------------------------------------------------------------------------------------\n");
+    printf("         A            B            C            D            E            F            G          H        \n");
+    printf("  ---------------------------------------------------------------------------------------------------------\n");
     for (int y = 0; y < BOARD_SIZE; y++){
-        printf("|");
+        printf("%d",8-y);
+        printf(" |");
         for (int x = 0; x < BOARD_SIZE; x++){
             Piece *piece = this->board_array[x][y]->getPiece();
             if(isRook(piece)){
-                printf("  Rook (V)  ");
+                if(piece->getColor() == WHITE){
+                    printf("  Rook (W)  ");
+                }else{
+                    printf("  Rook (B)  ");
+                }
             }else if(isKnight(piece)){
-                printf(" Knight (J) ");
+                if(piece->getColor() == WHITE){
+                    printf(" Knight (W) ");
+                }else{
+                    printf(" Knight (B) ");
+                }
             }else if(isBishop(piece)){
-                printf(" Bishop (S) ");
+
+                if(piece->getColor() == WHITE){
+                    printf(" Bishop (W) ");
+                }else{
+                    printf(" Bishop (B) ");
+                }
             }else if(isKing(piece)){
-                printf("  King (K)  ");
+                if(piece->getColor() == WHITE){
+                    printf("  King (W)  ");
+                }else{
+                    printf("  King (B)  ");
+                }
             }else if(isQueen(piece)){
-                printf(" Queen (D)  ");
+                if(piece->getColor() == WHITE){
+                    printf(" Queen (W)  ");
+                }else{
+                    printf(" Queen (B)  ");
+                }
             }else if(isPawn(piece)){
-                printf("  pawn (p)  ");
+                if(piece->getColor() == WHITE){
+                    printf("  pawn (W)  ");
+                }else{
+                    printf("  pawn (B)  ");
+                }
             }else{
                 printf("            ");
             }
@@ -302,7 +329,7 @@ void Board::showPiecesText(){
                 printf("|");
             }
         }
-        printf("---------------------------------------------------------------------------------------------------------\n");
+        printf("  ---------------------------------------------------------------------------------------------------------\n");
     }
 }
 

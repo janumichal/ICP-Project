@@ -71,7 +71,7 @@ string Move::pritnMove(){
     char x = (char)(this->to->getCol() + 97);
     char y = (char)(8 - this->to->getRow() + 48);
     output += x;
-    output += 'y';
+    output += y;
     if (this->getExchange() != '\0'){
         output += this->getExchange();
     }

@@ -15,11 +15,30 @@ using namespace std;
 class Tab {
 
 public:
+    /**
+     * @brief instance of game
+     */
     Game *game;
     /**
      * @brief Creates instance of Tab.
      */
     Tab();
+
+    /**
+     * @brief loads file and validates the moves.
+     * @param url
+     */
+    void Load(const string &url);
+    /**
+     * @brief prints games
+     */
+    void PrintGame();
+    /**
+     * @brief moves from to
+     * @param from position of out piece
+     * @param to position where to go
+     */
+    void Move(string from, string to);
 
     /**
      * @brief Next move in Auto mode.
