@@ -84,7 +84,7 @@ Tab::Tab() {
 //
 //
 //    this->game->board->showPiecesText();
-}
+//}
 
 void Tab::next(){
     if(this->game->isAuto_mode()){
