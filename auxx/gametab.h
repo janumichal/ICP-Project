@@ -2,6 +2,11 @@
 #define GAMETAB_H
 
 #include <QWidget>
+#include <Chess_common/Tab.h>
+#include "ui_gametab.h"
+#include "Chess_common/Board.h"
+#include "Chess_common/Game.h"
+#include "Chess_common/Field.h"
 
 namespace Ui {
 class GameTab;
@@ -33,9 +38,13 @@ private slots:
 
     void on_PrevButton_clicked();
 
-    void drawFigure(int i, int x, bool isPawn, bool isKnight, bool isBishop, bool isRook, bool isQueen, bool isKing);
-    //void on_a1button_clicked();
+    QLabel* Get_Coord(int x, int y);
 
+   //void drawFigure(int i, int x /*bool isPawn, bool isKnight, bool isBishop, bool isRook, bool isQueen, bool isKing*/);
+    //void on_a1button_clicked();
+    void drawFigure(int x,int y, Tab *tab);
+
+    void drawBoard(int size, Tab *tab);
 
 private:
     Ui::GameTab *ui;

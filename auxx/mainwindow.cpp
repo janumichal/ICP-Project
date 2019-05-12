@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "gametab.h"
+#include "Chess_common/Tab.h"
 
 
 
@@ -24,8 +25,6 @@ void MainWindow::on_pushButton_clicked()
     ui->TabWidget->setCurrentIndex(ui->TabWidget->count() - 1);
 
     //int tab_index = ui->TabWidget->count();
-
-    //Todo indexovani tabu a jejich vytvareni.
 
 }
 
