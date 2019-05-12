@@ -22,5 +22,5 @@ doxygen:
 	doxygen src/doxyconf
 
 pack: clean
-	zip -r xjanum03-xgajda06.zip doc examples src Makefile README.txt
+	zip -r xjanum03-xgajda06-100-0.zip doc examples src Makefile README.txt
 

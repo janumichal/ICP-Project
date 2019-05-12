@@ -64,6 +64,10 @@ void Game::fullFormat(Move *one_move){
                 }
 
                 this->index++;
+                if(!this->board->validation){
+                    this->board->validation = true;
+                    this->index--;
+                }
             }else{
                 if ((from->getPiece() != nullptr && from->getPiece()->getColor() == WHITE && to->getRow() == 0)||(from->getPiece() != nullptr && from->getPiece()->getColor() == BLACK && to->getRow() == 7)){
                     if (this->board->is_white_on_move()){
@@ -93,6 +97,10 @@ void Game::fullFormat(Move *one_move){
             }
 
             this->index++;
+            if(!this->board->validation){
+                this->board->validation = true;
+                this->index--;
+            }
         }else if (one_move->isKing() && isKing(from->getPiece())){
             move(from, to);
 
@@ -101,6 +109,10 @@ void Game::fullFormat(Move *one_move){
             }
 
             this->index++;
+            if(!this->board->validation){
+                this->board->validation = true;
+                this->index--;
+            }
         }else if (one_move->isQueen() && isQueen(from->getPiece())){
             move(from, to);
 
@@ -109,6 +121,10 @@ void Game::fullFormat(Move *one_move){
             }
 
             this->index++;
+            if(!this->board->validation){
+                this->board->validation = true;
+                this->index--;
+            }
         }else if (one_move->isBishop() && isBishop(from->getPiece())){
             move(from, to);
 
@@ -117,14 +133,23 @@ void Game::fullFormat(Move *one_move){
             }
 
             this->index++;
+            if(!this->board->validation){
+                this->board->validation = true;
+                this->index--;
+            }
         }else if (one_move->isRook() && isRook(from->getPiece())){
             move(from, to);
 
             if (!checkMat(one_move)){
+                this->board->validation = true;
                 return;
             }
 
             this->index++;
+            if(!this->board->validation){
+                this->board->validation = true;
+                this->index--;
+            }
         }else {
             printf("WRONGLY FORMATED MOVE\n");
         }
@@ -147,6 +172,10 @@ void Game::exchange(Move* one_move){
         one_move->getFrom()->removePiece();
         one_move->getTo()->putPiece(piece);
         this->index++;
+        if(!this->board->validation){
+            this->board->validation = true;
+            this->index--;
+        }
 
     }else if (one_move->getExchange() == 'V'){
         auto *piece = new Rook(one_move->getRow(),one_move->getColumn(), one_move->getFrom()->getPiece()->getColor());
@@ -156,6 +185,10 @@ void Game::exchange(Move* one_move){
         one_move->getFrom()->removePiece();
         one_move->getTo()->putPiece(piece);
         this->index++;
+        if(!this->board->validation){
+            this->board->validation = true;
+            this->index--;
+        }
     }else if (one_move->getExchange() == 'J'){
         auto *piece = new Knight(one_move->getRow(),one_move->getColumn(), one_move->getFrom()->getPiece()->getColor());
 
@@ -164,6 +197,10 @@ void Game::exchange(Move* one_move){
         one_move->getFrom()->removePiece();
         one_move->getTo()->putPiece(piece);
         this->index++;
+        if(!this->board->validation){
+            this->board->validation = true;
+            this->index--;
+        }
     }else if (one_move->getExchange() == 'S'){
         auto *piece = new Bishop(one_move->getRow(),one_move->getColumn(), one_move->getFrom()->getPiece()->getColor());
 
@@ -172,6 +209,10 @@ void Game::exchange(Move* one_move){
         one_move->getFrom()->removePiece();
         one_move->getTo()->putPiece(piece);
         this->index++;
+        if(!this->board->validation){
+            this->board->validation = true;
+            this->index--;
+        }
     }else {
         printf("WRONGLY FORMATED MOVE WRONG PIECE\n");
     }
@@ -890,6 +931,10 @@ void Game::pieceCheckMove(Field *from, Move *one_move){
     }
 
     this->index++;
+    if(!this->board->validation){
+        this->board->validation = true;
+        this->index--;
+    }
 }
 
 void Game::kingCheck(Move *one_move){
@@ -906,6 +951,10 @@ void Game::kingCheck(Move *one_move){
             }
 
             this->index++;
+            if(!this->board->validation){
+                this->board->validation = true;
+                this->index--;
+            }
             break;
         }
     }
@@ -969,12 +1018,18 @@ void Game::move(Field *from, Field *to){
 
             this->loaded_moves.push_back(move);
             this->index++;
+            if(!this->board->validation){
+                this->board->validation = true;
+                this->index--;
+            }
         }
     }else{
         item = this->board->movePiece(from, to);
         this->game_end = this->board->game_end;
         if (item != nullptr){
             this->history->add(item);
+        }else{
+            this->index--;
         }
     }
 

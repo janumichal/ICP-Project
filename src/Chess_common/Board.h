@@ -31,6 +31,7 @@ private:
     int black_points;
 
 public:
+    bool validation = true;
     /**
      * @brief is white one move
      */

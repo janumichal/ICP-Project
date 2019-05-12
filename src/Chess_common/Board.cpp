@@ -222,7 +222,7 @@ void Board::move(Field *from, Field *to){
     if (!to->isEmpty()){
         if(from->getPiece()->getColor() == to->getPiece()->getColor()){
             printf("CANT ATTACK SAME COLOR");
-            // TODO WINDOW POPUP
+            this->validation = false;
         }else{
             Piece *piece_to;
             Piece *piece_from = from->removePiece();
