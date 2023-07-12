@@ -1,4 +1,4 @@
-PROJEKT DO PREDMĚTU IJA (Chess)
+PROJEKT DO PREDMĚTU ICP (Chess)
 rozdělení bodů xjanum03-xgajda06 100-0
 
 Projekt jde přeloži pomocí ant:
